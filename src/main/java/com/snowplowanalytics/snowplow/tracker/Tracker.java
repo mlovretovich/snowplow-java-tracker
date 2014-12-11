@@ -16,6 +16,7 @@ package com.snowplowanalytics.snowplow.tracker;
 import com.snowplowanalytics.snowplow.tracker.core.Subject;
 import com.snowplowanalytics.snowplow.tracker.core.emitter.Emitter;
 
+
 public class Tracker extends com.snowplowanalytics.snowplow.tracker.core.Tracker {
 
     /**
@@ -24,8 +25,11 @@ public class Tracker extends com.snowplowanalytics.snowplow.tracker.core.Tracker
      * @param appId Application ID
      */
     public Tracker(com.snowplowanalytics.snowplow.tracker.core.emitter.Emitter emitter, String namespace, String appId) {
+
+
         super(emitter, namespace, appId);
         super.setTrackerVersion(Version.TRACKER);
+        System.out.println("testing");
     }
 
     /**

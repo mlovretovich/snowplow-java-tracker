@@ -27,7 +27,7 @@ public enum BufferOption {
      * Sends events in a group only after collecting 10 events. In a POST request, this is
      * sent in one payload. For a GET request, individual requests are sent following each other.
      */
-    Default(10);
+    Default(1000);
 
     private int code;
 

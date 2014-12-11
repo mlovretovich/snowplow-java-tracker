@@ -101,9 +101,9 @@ public class Emitter {
                     .setPath("/i");
         } else { // POST
             uri = new URIBuilder()
-                    .setScheme("http")
+                    .setScheme("https")
                     .setHost(URI)
-                    .setPath("/" + Constants.DEFAULT_VENDOR + "/tp2");
+                    .setPath("/i");
         }
         this.requestCallback = callback;
         this.httpMethod = httpMethod;
@@ -203,6 +203,8 @@ public class Emitter {
         HttpPost httpPost = new HttpPost(uri.toString());
         httpPost.addHeader("Content-Type", "application/json; charset=utf-8");
         HttpResponse httpResponse = null;
+
+        System.out.println(uri.toString());
 
         try {
             StringEntity params = new StringEntity(payload.toString());

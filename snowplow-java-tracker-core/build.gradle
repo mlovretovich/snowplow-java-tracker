@@ -16,6 +16,8 @@ apply plugin: 'java'
 // As per http://www.gradle.org/docs/current/userguide/publishing_maven.html
 apply plugin: 'maven-publish'
 
+apply plugin: 'ivy-publish'
+
 group = 'com.snowplowanalytics'
 version = '0.1.4'
 
@@ -62,10 +64,31 @@ publishing {
                 classifier "sources"
             }
         }
+
+        ivy(IvyPublication) {
+            from components.java
+            artifact(sourceJar) {
+                type "source"
+                conf "runtime"
+                name "snowplow-java-tracker-core-sources"
+            }
+            descriptor.withXml {
+                asNode().info[0].appendNode('description', description)
+            }
+        }
     }
     repositories {
         maven {
-            url "$buildDir/repo" // change to point to your repo, e.g. http://my.org/repo
+            url "${System.properties['user.home']}/.ivy2/local" // change to point to your repo, e.g. http://my.org/repo
+        }
+        ivy {
+            // change to point to your repo, e.g. http://my.org/repo
+            url "${System.properties['user.home']}/.ivy2/local"
+            layout 'pattern' , {
+                artifact '[organisation]/[module]/[revision]/[type]s/[artifact](.[ext])'
+                ivy '[organisation]/[module]/[revision]/ivys/ivy.xml'
+
+            }
         }
     }
 }
